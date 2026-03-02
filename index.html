@@ -6,19 +6,14 @@
     <title>BUYSELL Nigeria | Trusted Online Marketplace</title>
     <meta name="description" content="Nigeria's most trusted marketplace for buying and selling. Secure payments, verified sellers, fast delivery.">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Supabase JS (for database) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -165,7 +160,6 @@
 </head>
 <body class="bg-neutral-50 text-neutral-900">
 
-    <!-- ================= LANDING PAGE ================= -->
     <div id="landing-page" class="fixed inset-0 z-50 bg-gradient-to-br from-neutral-900 via-neutral-800 to-brand-900">
         <div class="min-h-screen flex flex-col">
             <header class="p-6 flex justify-between items-center">
@@ -183,7 +177,6 @@
             
             <main class="flex-1 flex items-center justify-center px-6">
                 <div class="grid md:grid-cols-2 gap-8 max-w-6xl w-full">
-                    <!-- Buyer Card -->
                     <div onclick="enterSite('buyer')" class="group cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8 hover:bg-white/20 transition-all duration-300">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-16 h-16 bg-gradient-to-br from-accent-400 to-accent-600 rounded-2xl flex items-center justify-center">
@@ -208,7 +201,6 @@
                         </button>
                     </div>
                     
-                    <!-- Seller Card -->
                     <div onclick="enterSite('seller')" class="group cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8 hover:bg-white/20 transition-all duration-300">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-700 rounded-2xl flex items-center justify-center">
@@ -245,9 +237,7 @@
         </div>
     </div>
 
-    <!-- ================= MAIN NAVIGATION ================= -->
     <nav id="main-nav" class="hidden-section sticky top-0 z-40 bg-white header-shadow">
-        <!-- Top Bar -->
         <div class="bg-neutral-900 text-white text-xs py-2">
             <div class="container mx-auto px-4 flex justify-between items-center">
                 <div class="flex items-center gap-4">
@@ -265,10 +255,8 @@
             </div>
         </div>
         
-        <!-- Main Header -->
         <div class="container mx-auto px-4 py-3">
             <div class="flex items-center gap-6">
-                <!-- Logo -->
                 <div class="flex items-center gap-2 cursor-pointer" onclick="location.reload()">
                     <div class="w-9 h-9 bg-gradient-to-br from-brand-500 to-brand-700 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold">B</span>
@@ -276,7 +264,6 @@
                     <span class="text-xl font-heading font-bold text-neutral-900">BUY<span class="text-accent-500">SELL</span></span>
                 </div>
                 
-                <!-- Search Bar -->
                 <div class="flex-1 max-w-3xl">
                     <div class="relative">
                         <input type="text" id="search-input" placeholder="Search for products, brands and categories..." 
@@ -288,7 +275,6 @@
                     </div>
                 </div>
                 
-                <!-- User Actions -->
                 <div class="flex items-center gap-4">
                     <div id="auth-buttons">
                         <button onclick="showLoginModal()" class="btn-secondary px-4 py-2 rounded-lg text-sm font-medium">Sign In</button>
@@ -306,7 +292,6 @@
             </div>
         </div>
         
-        <!-- Category Navigation -->
         <div class="border-t border-neutral-200">
             <div class="container mx-auto px-4">
                 <div class="flex items-center gap-1 overflow-x-auto no-scrollbar py-2" id="category-filters">
@@ -330,10 +315,8 @@
         </div>
     </nav>
 
-    <!-- ================= MAIN CONTENT ================= -->
     <div id="buyer-view" class="hidden-section">
         
-        <!-- Hero Carousel -->
         <div class="relative bg-neutral-100">
             <div class="container mx-auto px-4 py-6">
                 <div class="relative rounded-2xl overflow-hidden shadow-xl">
@@ -364,7 +347,6 @@
                         </div>
                     </div>
                     
-                    <!-- Carousel Controls -->
                     <button onclick="moveCarousel(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition">
                         <i class="fa-solid fa-chevron-left text-neutral-700"></i>
                     </button>
@@ -372,7 +354,6 @@
                         <i class="fa-solid fa-chevron-right text-neutral-700"></i>
                     </button>
                     
-                    <!-- Carousel Indicators -->
                     <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                         <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white transition" onclick="goToSlide(0)"></button>
                         <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white transition" onclick="goToSlide(1)"></button>
@@ -381,7 +362,6 @@
             </div>
         </div>
 
-        <!-- Category Icons -->
         <div class="container mx-auto px-4 py-4">
             <div class="bg-white rounded-xl shadow-sm border border-neutral-200 p-4 overflow-x-auto no-scrollbar">
                 <div class="flex gap-4 min-w-max">
@@ -425,7 +405,6 @@
             </div>
         </div>
 
-        <!-- Products Section -->
         <div class="container mx-auto px-4 py-6">
             <div class="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-hidden">
                 <div class="p-6 border-b border-neutral-200 flex justify-between items-center flex-wrap gap-4">
@@ -447,7 +426,6 @@
                 </div>
                 
                 <div class="p-6">
-                    <!-- Loading State -->
                     <div id="loading-products" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         <div class="skeleton h-48 rounded-xl"></div>
                         <div class="skeleton h-48 rounded-xl"></div>
@@ -457,19 +435,15 @@
                         <div class="skeleton h-48 rounded-xl"></div>
                     </div>
                     
-                    <!-- Products Grid (populated by JS) -->
                     <div id="products-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 hidden">
-                        <!-- Products injected here -->
-                    </div>
+                        </div>
                     
-                    <!-- Empty State -->
                     <div id="empty-state" class="hidden text-center py-12">
                         <i class="fa-solid fa-box-open text-4xl text-neutral-300 mb-4"></i>
                         <p class="text-neutral-500">No products found. Try adjusting your filters.</p>
                         <button class="btn-primary text-white px-6 py-2 rounded-lg mt-4" onclick="resetFilters()">View All Products</button>
                     </div>
                     
-                    <!-- Error State -->
                     <div id="error-state" class="hidden text-center py-12">
                         <i class="fa-solid fa-triangle-exclamation text-4xl text-red-400 mb-4"></i>
                         <p class="text-neutral-500 mb-4">Failed to load products. Please check your connection.</p>
@@ -479,7 +453,6 @@
             </div>
         </div>
 
-        <!-- Trust Badges -->
         <div class="container mx-auto px-4 py-8">
             <div class="bg-gradient-to-br from-neutral-50 to-white rounded-2xl border border-neutral-200 p-8">
                 <h2 class="text-2xl font-heading font-bold text-center mb-8">Why Nigerians Trust BUYSELL</h2>
@@ -517,9 +490,6 @@
         </div>
     </div>
 
-    <!-- ================= MODALS ================= -->
-    
-    <!-- Login/Register Modal -->
     <div id="auth-modal" class="modal">
         <div class="modal-content p-6 relative">
             <button onclick="closeModal('auth-modal')" class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600">
@@ -534,7 +504,6 @@
                 <p class="text-neutral-500 text-sm">Sign in to start shopping or selling</p>
             </div>
             
-            <!-- Login Form -->
             <form id="login-form" onsubmit="handleLogin(event)">
                 <div class="space-y-4">
                     <div>
@@ -552,7 +521,6 @@
                 </p>
             </form>
             
-            <!-- Register Form (Hidden by default) -->
             <form id="register-form" class="hidden" onsubmit="handleRegister(event)">
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 gap-4">
@@ -590,7 +558,6 @@
         </div>
     </div>
 
-    <!-- Product Detail Modal -->
     <div id="product-modal" class="modal">
         <div class="modal-content p-6 relative max-w-4xl">
             <button onclick="closeModal('product-modal')" class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 z-10">
@@ -598,7 +565,6 @@
             </button>
             
             <div id="product-detail-content" class="grid md:grid-cols-2 gap-6">
-                <!-- Product Image -->
                 <div class="relative">
                     <img id="modal-product-image" src="" class="w-full h-80 object-cover rounded-xl" alt="">
                     <span id="modal-video-badge" class="hidden absolute top-4 right-4 video-badge text-xs px-3 py-1.5 rounded text-white font-medium flex items-center gap-1">
@@ -606,7 +572,6 @@
                     </span>
                 </div>
                 
-                <!-- Product Info -->
                 <div>
                     <div class="flex items-start justify-between mb-3">
                         <h3 id="modal-product-name" class="text-xl font-heading font-bold"></h3>
@@ -662,7 +627,6 @@
                         </button>
                     </div>
                     
-                    <!-- Seller Info -->
                     <div class="mt-6 pt-4 border-t border-neutral-200">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center">
@@ -684,7 +648,6 @@
         </div>
     </div>
 
-    <!-- Haggle/Negotiate Modal -->
     <div id="haggle-modal" class="modal">
         <div class="modal-content p-6 relative max-w-md">
             <button onclick="closeModal('haggle-modal')" class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600">
@@ -711,7 +674,6 @@
         </div>
     </div>
 
-    <!-- Cart Modal -->
     <div id="cart-modal" class="modal">
         <div class="modal-content p-6 relative max-w-2xl max-h-[80vh] overflow-y-auto">
             <button onclick="closeModal('cart-modal')" class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600">
@@ -721,7 +683,6 @@
             <h3 class="text-lg font-heading font-bold mb-4">Your Cart (<span id="cart-item-count">0</span> items)</h3>
             
             <div id="cart-items" class="space-y-4">
-                <!-- Cart items injected here -->
                 <p class="text-neutral-500 text-center py-8">Your cart is empty</p>
             </div>
             
@@ -741,7 +702,6 @@
         </div>
     </div>
 
-    <!-- Help Modal -->
     <div id="help-modal" class="modal">
         <div class="modal-content p-6 relative max-w-lg">
             <button onclick="closeModal('help-modal')" class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600">
@@ -788,7 +748,6 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
     <div id="toast" class="toast">
         <div class="flex items-start gap-3">
             <i id="toast-icon" class="fa-solid fa-circle-check text-green-500 text-lg mt-0.5"></i>
@@ -799,15 +758,16 @@
         </div>
     </div>
 
-    <!-- ================= JAVASCRIPT ================= -->
-    <script>
+    <script type="module">
         // ==========================================
         // SUPABASE CONFIGURATION
         // ==========================================
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
         const SUPABASE_URL = 'https://hasairlvjazwhtvylrjl.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_Z179YOa4aZcA2SR2mqWlfw_sM7Xa9y8';
         
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
         
         // ==========================================
         // GLOBAL STATE
@@ -824,15 +784,40 @@
         // INITIALIZATION
         // ==========================================
         document.addEventListener('DOMContentLoaded', async () => {
-            // Check for existing session
-            const {  { session } } = await supabase.auth.getSession();
+            // Check for existing session (FIXED SYNTAX ERROR HERE)
+            const { data: { session } } = await supabase.auth.getSession();
             if (session?.user) {
                 currentUser = session.user;
                 updateAuthUI();
             }
             
-            // Load products when entering site
+            // Attach functions to window so HTML buttons can use them
             window.loadProducts = loadProducts;
+            window.handleLogin = handleLogin;
+            window.handleRegister = handleRegister;
+            window.logoutUser = logoutUser;
+            window.toggleAuthMode = toggleAuthMode;
+            window.showLoginModal = showLoginModal;
+            window.closeModal = closeModal;
+            window.showProfile = showProfile;
+            window.showHelpModal = showHelpModal;
+            window.enterSite = enterSite;
+            window.moveCarousel = moveCarousel;
+            window.goToSlide = goToSlide;
+            window.filterByCategory = filterByCategory;
+            window.filterByVideo = filterByVideo;
+            window.sortProducts = sortProducts;
+            window.resetFilters = resetFilters;
+            window.performSearch = performSearch;
+            window.handleSearch = handleSearch;
+            window.showProductDetail = showProductDetail;
+            window.addToCart = addToCart;
+            window.showCart = showCart;
+            window.updateCartItem = updateCartItem;
+            window.removeFromCart = removeFromCart;
+            window.checkout = checkout;
+            window.showHaggleModal = showHaggleModal;
+            window.submitHaggle = submitHaggle;
         });
         
         // ==========================================
@@ -857,7 +842,6 @@
             updateAuthUI();
             showToast('Welcome back! 👋', 'success');
             
-            // Load user profile data if needed
             loadUserProfile();
         }
         
@@ -871,11 +855,12 @@
             
             showToast('Creating account...', 'info');
             
+            // FIXED SYNTAX ERROR HERE
             const { data, error } = await supabase.auth.signUp({
                 email,
                 password,
                 options: {
-                     {
+                    data: {
                         first_name: firstName,
                         last_name: lastName,
                         user_type: userType
@@ -924,7 +909,6 @@
                 userActions.classList.remove('hidden');
                 userMenu.classList.remove('hidden');
                 
-                // Get user name from metadata or profile
                 const name = currentUser.user_metadata?.first_name || currentUser.email?.split('@')[0] || 'User';
                 userName.textContent = name;
             } else {
@@ -961,7 +945,6 @@
                 return;
             }
             
-            // Store user data for later use
             window.userData = data;
         }
         
@@ -969,7 +952,6 @@
         // PRODUCT FUNCTIONS
         // ==========================================
         async function loadProducts(filters = {}) {
-            // Show loading state
             document.getElementById('loading-products').classList.remove('hidden');
             document.getElementById('products-grid').classList.add('hidden');
             document.getElementById('empty-state').classList.add('hidden');
@@ -978,7 +960,6 @@
             try {
                 let query = supabase.from('products').select('*').eq('status', 'active');
                 
-                // Apply filters
                 if (filters.category && filters.category !== 'all') {
                     query = query.eq('category', filters.category);
                 }
@@ -995,7 +976,6 @@
                     query = query.lte('price', filters.maxPrice);
                 }
                 
-                // Sort
                 switch(filters.sortBy) {
                     case 'price-low': query = query.order('price', { ascending: true }); break;
                     case 'price-high': query = query.order('price', { ascending: false }); break;
@@ -1010,10 +990,7 @@
                 products = data || [];
                 filteredProducts = [...products];
                 
-                // Update product count
                 document.getElementById('product-count').textContent = filteredProducts.length;
-                
-                // Hide loading, show grid
                 document.getElementById('loading-products').classList.add('hidden');
                 
                 if (filteredProducts.length === 0) {
@@ -1079,14 +1056,13 @@
         }
         
         function showProductDetail(productId) {
-            const product = products.find(p => p.id === productId);
+            const product = products.find(p => p.id == productId);
             if (!product) return;
             
             currentProduct = product;
             
-            // Populate modal
             document.getElementById('modal-product-image').src = 
-                product.image_url || 'https://via.placeholder.com/400x400?text=No+Image';
+                product.image_url || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop';
             document.getElementById('modal-product-name').textContent = product.name;
             document.getElementById('modal-product-price').textContent = `₦${product.price?.toLocaleString() || '0'}`;
             
@@ -1107,13 +1083,11 @@
                 product.condition?.charAt(0).toUpperCase() + product.condition?.slice(1) || 'New';
             document.getElementById('modal-location').textContent = product.location || 'Nigeria';
             
-            // Shipping info
             const shippingText = product.is_free_shipping ? 
                 'Free delivery nationwide' : 
                 `Delivery: ₦${product.shipping_cost?.toLocaleString() || '1,500'}`;
             document.getElementById('modal-shipping').textContent = shippingText;
             
-            // Negotiable badge
             if (product.is_negotiable) {
                 document.getElementById('modal-negotiable').classList.remove('hidden');
                 document.getElementById('haggle-btn').classList.remove('hidden');
@@ -1122,30 +1096,27 @@
                 document.getElementById('haggle-btn').classList.add('hidden');
             }
             
-            // Video badge
             if (product.has_video) {
                 document.getElementById('modal-video-badge').classList.remove('hidden');
             } else {
                 document.getElementById('modal-video-badge').classList.add('hidden');
             }
             
-            // Seller info (mock for now)
             document.getElementById('modal-seller-name').textContent = 
                 product.seller_name || 'Verified Seller';
             
-            // Show modal
             document.getElementById('product-modal').classList.add('active');
         }
         
         // ==========================================
         // CART FUNCTIONS
         // ==========================================
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId) || currentProduct;
+        function addToCart(productId = null) {
+            const idToUse = productId || currentProduct?.id;
+            const product = products.find(p => p.id == idToUse);
             if (!product) return;
             
-            // Check if already in cart
-            const existingItem = cart.find(item => item.id === product.id);
+            const existingItem = cart.find(item => item.id == product.id);
             
             if (existingItem) {
                 existingItem.quantity += 1;
@@ -1160,10 +1131,7 @@
                 });
             }
             
-            // Save to localStorage
             localStorage.setItem('buysell_cart', JSON.stringify(cart));
-            
-            // Update UI
             updateCartCount();
             showToast(`${product.name} added to cart! 🛒`, 'success');
         }
@@ -1184,7 +1152,7 @@
             } else {
                 cartItems.innerHTML = cart.map(item => `
                     <div class="flex gap-4 p-3 border border-neutral-200 rounded-lg">
-                        <img src="${item.image || 'https://via.placeholder.com/80'}" 
+                        <img src="${item.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80&h=80&fit=crop'}" 
                              class="w-20 h-20 object-cover rounded-lg" alt="${item.name}">
                         <div class="flex-1">
                             <h4 class="font-medium text-sm">${item.name}</h4>
@@ -1208,7 +1176,6 @@
                     </div>
                 `).join('');
                 
-                // Calculate subtotal
                 const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
                 document.getElementById('cart-subtotal').textContent = `₦${subtotal.toLocaleString()}`;
                 cartSummary.classList.remove('hidden');
@@ -1218,7 +1185,7 @@
         }
         
         function updateCartItem(productId, change) {
-            const item = cart.find(i => i.id === productId);
+            const item = cart.find(i => i.id == productId);
             if (!item) return;
             
             item.quantity += change;
@@ -1227,15 +1194,15 @@
                 removeFromCart(productId);
             } else {
                 localStorage.setItem('buysell_cart', JSON.stringify(cart));
-                showCart(); // Re-render
+                showCart(); 
                 updateCartCount();
             }
         }
         
         function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
+            cart = cart.filter(item => item.id != productId);
             localStorage.setItem('buysell_cart', JSON.stringify(cart));
-            showCart(); // Re-render
+            showCart(); 
             updateCartCount();
             showToast('Item removed from cart', 'success');
         }
@@ -1249,9 +1216,6 @@
             }
             
             showToast('Redirecting to Paystack...', 'info');
-            
-            // In production, this would call your backend to create a Paystack transaction
-            // For demo, we'll simulate:
             setTimeout(() => {
                 showToast('🎉 Order placed successfully! Check your email for confirmation.', 'success');
                 cart = [];
@@ -1267,8 +1231,7 @@
         function showHaggleModal() {
             if (!currentProduct) return;
             
-            document.getElementById('haggle-original').textContent = 
-                `₦${currentProduct.price?.toLocaleString() || '0'}`;
+            document.getElementById('haggle-original').textContent = `₦${currentProduct.price?.toLocaleString() || '0'}`;
             document.getElementById('haggle-amount').value = '';
             document.getElementById('haggle-message').value = '';
             
@@ -1293,7 +1256,6 @@
             
             showToast('Sending offer to seller...', 'info');
             
-            // Save offer to Supabase
             const { error } = await supabase.from('offers').insert({
                 product_id: currentProduct.id,
                 buyer_id: currentUser.id,
@@ -1319,9 +1281,7 @@
         // SEARCH & FILTER FUNCTIONS
         // ==========================================
         function handleSearch(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
+            if (e.key === 'Enter') performSearch();
         }
         
         function performSearch() {
@@ -1330,7 +1290,6 @@
                 showToast('Please enter at least 2 characters to search', 'error');
                 return;
             }
-            
             loadProducts({ search: query });
             showToast(`Searching for "${query}"...`, 'info');
         }
@@ -1358,7 +1317,7 @@
         }
         
         // ==========================================
-        // CAROUSEL FUNCTIONS
+        // CAROUSEL & UI FUNCTIONS
         // ==========================================
         function updateCarousel() {
             const track = document.getElementById('carousel-track');
@@ -1377,72 +1336,46 @@
             updateCarousel();
         }
         
-        // Auto-advance carousel
         setInterval(() => {
             if (document.getElementById('buyer-view').classList.contains('hidden-section') === false) {
                 moveCarousel(1);
             }
         }, 6000);
         
-        // ==========================================
-        // UI HELPER FUNCTIONS
-        // ==========================================
         function enterSite(userType) {
-            // Animate landing page out
             const landing = document.getElementById('landing-page');
             landing.style.opacity = '0';
             landing.style.transition = 'opacity 0.3s ease';
             
             setTimeout(() => {
                 landing.style.display = 'none';
-                
-                // Show main app
                 document.getElementById('main-nav').classList.remove('hidden-section');
                 document.getElementById('buyer-view').classList.remove('hidden-section');
                 document.getElementById('buyer-view').style.animation = 'slide-up 0.4s ease-out';
                 
-                // Load products
                 loadProducts();
-                
-                // Update cart count
                 updateCartCount();
-                
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 300);
         }
         
-        function showLoginModal() {
-            document.getElementById('auth-modal').classList.add('active');
+        function showLoginModal() { document.getElementById('auth-modal').classList.add('active'); }
+        function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+        function showProfile() { 
+            if (!currentUser) return showLoginModal();
+            showToast('Profile dashboard coming soon! 👤', 'info'); 
         }
+        function showHelpModal() { document.getElementById('help-modal').classList.add('active'); }
         
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-        
-        function showProfile() {
-            if (!currentUser) {
-                showLoginModal();
-                return;
-            }
-            showToast('Profile feature coming soon! 👤', 'info');
-        }
-        
-        function showHelpModal() {
-            document.getElementById('help-modal').classList.add('active');
-        }
-        
-        // Toast Notifications
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
             const toastDetails = document.getElementById('toast-details');
             const toastIcon = document.getElementById('toast-icon');
             
-            toastMessage.textContent = type === 'success' ? 'Success!' : 
-                                      type === 'error' ? 'Error' : 'Info';
+            toastMessage.textContent = type === 'success' ? 'Success!' : type === 'error' ? 'Error' : 'Info';
             toastDetails.textContent = message;
             
-            // Set icon and color
             if (type === 'success') {
                 toastIcon.className = 'fa-solid fa-circle-check text-green-500 text-lg mt-0.5';
                 toast.style.borderLeftColor = '#10b981';
@@ -1454,22 +1387,21 @@
                 toast.style.borderLeftColor = '#3b82f6';
             }
             
-            // Show toast
             toast.classList.add('show');
-            
-            // Auto-hide after 4 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
+            setTimeout(() => toast.classList.remove('show'), 4000);
         }
         
-        // Close modals when clicking outside
+        // Close modals when clicking outside or hitting escape
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                }
+                if (e.target === modal) modal.classList.remove('active');
             });
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => modal.classList.remove('active'));
+            }
         });
         
         // Header scroll shadow
@@ -1482,22 +1414,12 @@
                 header.classList.remove('header-shadow');
                 return;
             }
-            
             if (currentScroll > lastScroll) {
                 header.classList.add('scroll-down');
             } else {
                 header.classList.remove('scroll-down');
             }
             lastScroll = currentScroll;
-        });
-        
-        // Keyboard navigation for modals
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal.active').forEach(modal => {
-                    modal.classList.remove('active');
-                });
-            }
         });
     </script>
 </body>

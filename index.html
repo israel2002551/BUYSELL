@@ -166,14 +166,12 @@ background: #f0fdf4;
 background: #0284c7 !important;
 color: white !important;
 }
-/* Order Status Colors */
 .status-pending { background: #fef3c7; color: #92400e; }
 .status-paid { background: #dbeafe; color: #1e40af; }
 .status-processing { background: #e9d5ff; color: #6b21a8; }
 .status-shipped { background: #c7d2fe; color: #3730a3; }
 .status-delivered { background: #d1fae5; color: #065f46; }
 .status-cancelled { background: #fee2e2; color: #991b1b; }
-/* Chatbot Styles */
 .chatbot-button {
 position: fixed;
 bottom: 6rem;
@@ -379,7 +377,6 @@ Open Your Store <i class="fa-solid fa-arrow-right"></i>
 </div>
 <!-- ================= MAIN NAVIGATION ================= -->
 <nav id="main-nav" class="hidden-section sticky top-0 z-40 bg-white header-shadow">
-<!-- Top Bar -->
 <div class="bg-neutral-900 text-white text-xs py-2">
 <div class="container mx-auto px-4 flex justify-between items-center">
 <div class="flex items-center gap-4">
@@ -395,17 +392,14 @@ Open Your Store <i class="fa-solid fa-arrow-right"></i>
 </div>
 </div>
 </div>
-<!-- Main Header -->
 <div class="container mx-auto px-4 py-3">
 <div class="flex items-center gap-6">
-<!-- Logo -->
 <div class="flex items-center gap-2 cursor-pointer" onclick="location.reload()">
 <div class="w-9 h-9 bg-gradient-to-br from-brand-500 to-brand-700 rounded-lg flex items-center justify-center">
 <span class="text-white font-bold">B</span>
 </div>
 <span class="text-xl font-heading font-bold text-neutral-900">BUY<span class="text-accent-500">SELL</span></span>
 </div>
-<!-- Search Bar -->
 <div class="flex-1 max-w-3xl">
 <div class="relative">
 <input type="text" id="search-input" placeholder="Search for products, brands and categories..."
@@ -416,7 +410,6 @@ onkeyup="handleSearch(event)">
 </button>
 </div>
 </div>
-<!-- User Actions -->
 <div class="flex items-center gap-4">
 <div id="auth-buttons">
 <button onclick="showLoginModal()" class="btn-secondary px-4 py-2 rounded-lg text-sm font-medium">Sign In</button>
@@ -436,7 +429,6 @@ onkeyup="handleSearch(event)">
 </div>
 </div>
 </div>
-<!-- Category Navigation -->
 <div class="border-t border-neutral-200">
 <div class="container mx-auto px-4">
 <div class="flex items-center gap-1 overflow-x-auto no-scrollbar py-2" id="category-filters">
@@ -466,7 +458,6 @@ Video Listings
 </nav>
 <!-- ================= BUYER VIEW ================= -->
 <div id="buyer-view" class="hidden-section">
-<!-- Hero Carousel -->
 <div class="relative bg-neutral-100">
 <div class="container mx-auto px-4 py-6">
 <div class="relative rounded-2xl overflow-hidden shadow-xl">
@@ -522,7 +513,6 @@ Browse Dropship Items <i class="fa-solid fa-arrow-right"></i>
 </div>
 </div>
 </div>
-<!-- Category Icons -->
 <div class="container mx-auto px-4 py-4">
 <div class="bg-white rounded-xl shadow-sm border border-neutral-200 p-4 overflow-x-auto no-scrollbar">
 <div class="flex gap-4 min-w-max">
@@ -571,7 +561,6 @@ Browse Dropship Items <i class="fa-solid fa-arrow-right"></i>
 </div>
 </div>
 </div>
-<!-- Trending Deals Section -->
 <div class="container mx-auto px-4 py-8" id="trending-section">
 <div class="flex items-center justify-between mb-6">
 <div>
@@ -608,7 +597,6 @@ Trending Deals
 <p class="text-neutral-500">No trending deals available</p>
 </div>
 </div>
-<!-- Products Section -->
 <div class="container mx-auto px-4 py-6">
 <div class="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-hidden">
 <div class="p-6 border-b border-neutral-200 flex justify-between items-center flex-wrap gap-4">
@@ -651,7 +639,6 @@ Trending Deals
 </div>
 </div>
 </div>
-<!-- Trust Badges -->
 <div class="container mx-auto px-4 py-8">
 <div class="bg-gradient-to-br from-neutral-50 to-white rounded-2xl border border-neutral-200 p-8">
 <h2 class="text-2xl font-heading font-bold text-center mb-8">Why Nigerians Trust BUYSELL</h2>
@@ -733,7 +720,6 @@ Hello! 👋 I'm your BUYSELL assistant. How can I help you today?
 </div>
 <!-- ================= SELLER DASHBOARD ================= -->
 <div id="seller-dashboard" class="hidden-section min-h-screen flex bg-neutral-50">
-<!-- Sidebar -->
 <aside class="w-64 bg-white border-r border-neutral-200 fixed h-full overflow-y-auto">
 <div class="p-6 border-b border-neutral-200">
 <div class="flex items-center gap-3">
@@ -798,9 +784,7 @@ Hello! 👋 I'm your BUYSELL assistant. How can I help you today?
 </button>
 </div>
 </aside>
-<!-- Main Content -->
 <main class="ml-64 flex-1 p-8">
-<!-- Overview Section -->
 <div id="seller-overview" class="seller-section">
 <div class="mb-8">
 <h1 class="text-3xl font-heading font-bold mb-2">Dashboard Overview</h1>
@@ -881,125 +865,119 @@ Hello! 👋 I'm your BUYSELL assistant. How can I help you today?
 </div>
 </div>
 </div>
-
-<!-- My Products Section (ADDED) -->
+<!-- My Products Section -->
 <div id="seller-products" class="seller-section hidden-section">
-    <div class="mb-8">
-        <h1 class="text-3xl font-heading font-bold mb-2">My Products</h1>
-        <p class="text-neutral-500">Manage your product listings</p>
-    </div>
-    <div class="bg-white rounded-xl border border-neutral-200 p-6">
-        <div class="flex justify-between items-center mb-4">
-            <select id="seller-product-filter" class="border border-neutral-300 rounded-lg px-3 py-2 text-sm" onchange="loadSellerProducts()">
-                <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-            </select>
-            <button onclick="showSellerSection('add-product')" class="btn-primary text-white px-4 py-2 rounded-lg text-sm">
-                <i class="fa-solid fa-plus mr-1"></i> Add Product
-            </button>
-        </div>
-        <div id="seller-products-loading" class="grid grid-cols-1 gap-4">
-            <div class="skeleton h-32 rounded-xl"></div>
-            <div class="skeleton h-32 rounded-xl"></div>
-            <div class="skeleton h-32 rounded-xl"></div>
-        </div>
-        <div id="seller-products-grid" class="grid grid-cols-1 gap-4 hidden"></div>
-        <div id="seller-products-empty" class="hidden text-center py-12">
-            <i class="fa-solid fa-box-open text-4xl text-neutral-300 mb-4"></i>
-            <p class="text-neutral-500">No products yet. Start by adding your first product!</p>
-        </div>
-    </div>
+<div class="mb-8">
+<h1 class="text-3xl font-heading font-bold mb-2">My Products</h1>
+<p class="text-neutral-500">Manage your product listings</p>
 </div>
-
-<!-- Orders Section (ADDED) -->
+<div class="bg-white rounded-xl border border-neutral-200 p-6">
+<div class="flex justify-between items-center mb-4">
+<select id="seller-product-filter" class="border border-neutral-300 rounded-lg px-3 py-2 text-sm" onchange="loadSellerProducts()">
+<option value="all">All Status</option>
+<option value="active">Active</option>
+<option value="inactive">Inactive</option>
+</select>
+<button onclick="showSellerSection('add-product')" class="btn-primary text-white px-4 py-2 rounded-lg text-sm">
+<i class="fa-solid fa-plus mr-1"></i> Add Product
+</button>
+</div>
+<div id="seller-products-loading" class="grid grid-cols-1 gap-4">
+<div class="skeleton h-32 rounded-xl"></div>
+<div class="skeleton h-32 rounded-xl"></div>
+<div class="skeleton h-32 rounded-xl"></div>
+</div>
+<div id="seller-products-grid" class="grid grid-cols-1 gap-4 hidden"></div>
+<div id="seller-products-empty" class="hidden text-center py-12">
+<i class="fa-solid fa-box-open text-4xl text-neutral-300 mb-4"></i>
+<p class="text-neutral-500">No products yet. Start by adding your first product!</p>
+</div>
+</div>
+</div>
+<!-- Orders Section -->
 <div id="seller-orders" class="seller-section hidden-section">
-    <div class="mb-8">
-        <h1 class="text-3xl font-heading font-bold mb-2">Orders</h1>
-        <p class="text-neutral-500">Manage customer orders</p>
-    </div>
-    <div id="orders-loading" class="grid grid-cols-1 gap-4">
-        <div class="skeleton h-40 rounded-xl"></div>
-        <div class="skeleton h-40 rounded-xl"></div>
-    </div>
-    <div id="orders-list" class="grid grid-cols-1 gap-4 hidden"></div>
-    <div id="orders-empty" class="hidden text-center py-12">
-        <i class="fa-solid fa-cart-shopping text-4xl text-neutral-300 mb-4"></i>
-        <p class="text-neutral-500">No orders yet</p>
-    </div>
+<div class="mb-8">
+<h1 class="text-3xl font-heading font-bold mb-2">Orders</h1>
+<p class="text-neutral-500">Manage customer orders</p>
 </div>
-
-<!-- Dropshipping Section (ADDED) -->
+<div id="orders-loading" class="grid grid-cols-1 gap-4">
+<div class="skeleton h-40 rounded-xl"></div>
+<div class="skeleton h-40 rounded-xl"></div>
+</div>
+<div id="orders-list" class="grid grid-cols-1 gap-4 hidden"></div>
+<div id="orders-empty" class="hidden text-center py-12">
+<i class="fa-solid fa-cart-shopping text-4xl text-neutral-300 mb-4"></i>
+<p class="text-neutral-500">No orders yet</p>
+</div>
+</div>
+<!-- Dropshipping Section -->
 <div id="seller-dropshipping" class="seller-section hidden-section">
-    <div class="mb-8">
-        <h1 class="text-3xl font-heading font-bold mb-2">
-            <i class="fa-solid fa-globe text-brand-600 mr-2"></i>
-            Dropshipping
-        </h1>
-        <p class="text-neutral-500">Import products from global suppliers</p>
-    </div>
-    <div class="bg-white rounded-xl border border-neutral-200 p-6">
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="supplier-card p-6 rounded-xl border cursor-pointer" onclick="selectSupplier('aliexpress')">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                        <i class="fa-solid fa-globe text-aliexpress text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold">AliExpress</h3>
-                        <p class="text-xs text-neutral-500">Millions of products</p>
-                    </div>
-                </div>
-                <button class="btn-primary text-white px-4 py-2 rounded-lg text-sm w-full">
-                    Connect Supplier
-                </button>
-            </div>
-            <div class="supplier-card p-6 rounded-xl border cursor-pointer" onclick="selectSupplier('cj')">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                        <i class="fa-solid fa-box text-cj text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold">CJ Dropshipping</h3>
-                        <p class="text-xs text-neutral-500">Fast shipping</p>
-                    </div>
-                </div>
-                <button class="btn-primary text-white px-4 py-2 rounded-lg text-sm w-full">
-                    Connect Supplier
-                </button>
-            </div>
-        </div>
-    </div>
+<div class="mb-8">
+<h1 class="text-3xl font-heading font-bold mb-2">
+<i class="fa-solid fa-globe text-brand-600 mr-2"></i>
+Dropshipping
+</h1>
+<p class="text-neutral-500">Import products from global suppliers</p>
 </div>
-
-<!-- Settings Section (ADDED) -->
+<div class="bg-white rounded-xl border border-neutral-200 p-6">
+<div class="grid md:grid-cols-2 gap-6">
+<div class="supplier-card p-6 rounded-xl border cursor-pointer" onclick="selectSupplier('aliexpress')">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+<i class="fa-solid fa-globe text-aliexpress text-xl"></i>
+</div>
+<div>
+<h3 class="font-bold">AliExpress</h3>
+<p class="text-xs text-neutral-500">Millions of products</p>
+</div>
+</div>
+<button class="btn-primary text-white px-4 py-2 rounded-lg text-sm w-full">
+Connect Supplier
+</button>
+</div>
+<div class="supplier-card p-6 rounded-xl border cursor-pointer" onclick="selectSupplier('cj')">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+<i class="fa-solid fa-box text-cj text-xl"></i>
+</div>
+<div>
+<h3 class="font-bold">CJ Dropshipping</h3>
+<p class="text-xs text-neutral-500">Fast shipping</p>
+</div>
+</div>
+<button class="btn-primary text-white px-4 py-2 rounded-lg text-sm w-full">
+Connect Supplier
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Settings Section -->
 <div id="seller-settings" class="seller-section hidden-section">
-    <div class="mb-8">
-        <h1 class="text-3xl font-heading font-bold mb-2">Store Settings</h1>
-        <p class="text-neutral-500">Manage your store preferences</p>
-    </div>
-    <div class="bg-white rounded-xl border border-neutral-200 p-6 max-w-2xl">
-        <form class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium mb-1">Store Name</label>
-                <input type="text" class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="Your store name">
-            </div>
-            <div>
-                <label class="block text-sm font-medium mb-1">Store Description</label>
-                <textarea rows="3" class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="Describe your store"></textarea>
-            </div>
-            <div>
-                <label class="block text-sm font-medium mb-1">WhatsApp Number</label>
-                <input type="tel" class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="0801 234 5678">
-            </div>
-            <button type="button" class="btn-primary text-white px-6 py-3 rounded-lg w-full">
-                Save Settings
-            </button>
-        </form>
-    </div>
+<div class="mb-8">
+<h1 class="text-3xl font-heading font-bold mb-2">Store Settings</h1>
+<p class="text-neutral-500">Manage your store preferences</p>
 </div>
-
-<!-- Add Product Section -->
+<div class="bg-white rounded-xl border border-neutral-200 p-6 max-w-2xl">
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium mb-1">Store Name</label>
+<input type="text" class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="Your store name">
+</div>
+<div>
+<label class="block text-sm font-medium mb-1">Store Description</label>
+<textarea rows="3" class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="Describe your store"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1">WhatsApp Number</label>
+<input type="tel" class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="0801 234 5678">
+</div>
+<button type="button" class="btn-primary text-white px-6 py-3 rounded-lg w-full">
+Save Settings
+</button>
+</form>
+</div>
+</div>
 <div id="seller-add-product" class="seller-section hidden-section">
 <div class="mb-8">
 <h1 class="text-3xl font-heading font-bold mb-2">Add New Product</h1>
@@ -1068,7 +1046,6 @@ Hello! 👋 I'm your BUYSELL assistant. How can I help you today?
 </form>
 </div>
 </div>
-<!-- Affiliate Earnings Section -->
 <div id="seller-affiliate" class="seller-section hidden-section">
 <div class="mb-8">
 <h1 class="text-3xl font-heading font-bold mb-2">
@@ -1145,7 +1122,6 @@ Affiliate Earnings
 </button>
 </div>
 </div>
-<!-- Commission Section -->
 <div id="seller-commission" class="seller-section hidden-section">
 <div class="mb-8">
 <h1 class="text-3xl font-heading font-bold mb-2">
@@ -1519,7 +1495,6 @@ const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const ADMIN_WHATSAPP = '2349061484256';
 const COMMISSION_AMOUNT = 5000;
 const COMMISSION_PERIOD_MONTHS = 3;
-// Chatbot Q&A Database
 const chatbotQA = {
 'how do i buy': 'To buy on BUYSELL Nigeria: 1️⃣ Browse or search for products 2️⃣ Click "Add to Cart" 3️⃣ Go to checkout 4️⃣ Make bank transfer to OPay: 9061484256 (Efe Israel) 5️⃣ Upload payment receipt 6️⃣ Seller contacts you on WhatsApp for delivery! 🛒',
 'how do i sell': 'To sell on BUYSELL Nigeria: 1️⃣ Sign up as a seller 2️⃣ Complete your profile 3️⃣ List your products with photos/videos 4️⃣ Set your prices 5️⃣ Receive orders on WhatsApp 6️⃣ Fulfill orders & get paid! You can also import from AliExpress/CJ for dropshipping. 💰',
@@ -1559,7 +1534,7 @@ loadTrendingDeals();
 startCarousel();
 });
 async function checkAuth() {
-const {  { session } } = await supabaseClient.auth.getSession();
+const { data: { session } } = await supabaseClient.auth.getSession();
 currentUser = session?.user || null;
 updateAuthUI();
 }
@@ -1669,7 +1644,6 @@ document.getElementById(`seller-${sectionId}`).classList.remove('hidden-section'
 document.querySelectorAll('.sidebar-link').forEach(link => {
 link.classList.remove('active');
 });
-// FIX: Check if event exists before using currentTarget
 if (event && event.currentTarget) {
 event.currentTarget.classList.add('active');
 }
@@ -1722,11 +1696,12 @@ const email = document.getElementById('reg-email').value;
 const password = document.getElementById('reg-password').value;
 const userType = document.getElementById('reg-usertype').value;
 const whatsapp = document.getElementById('reg-whatsapp').value;
+// FIXED: Correct object structure with 'data:' key
 const { data, error } = await supabaseClient.auth.signUp({
 email,
 password,
 options: {
- {
+data: {
 first_name: firstName,
 last_name: lastName,
 user_type: userType,
@@ -1885,7 +1860,7 @@ window.open(whatsappURL, '_blank');
 showToast('Withdrawal request sent via WhatsApp!', 'success');
 }
 // ==========================================
-// PRODUCT FUNCTIONS (BUYER) - FIXED ADD TO CART
+// PRODUCT FUNCTIONS (BUYER)
 // ==========================================
 async function loadProducts(filters = {}) {
 document.getElementById('loading-products').classList.remove('hidden');
@@ -1931,7 +1906,6 @@ grid.innerHTML = '';
 productsToRender.forEach(product => {
 const discount = product.original_price ?
 Math.round((1 - product.price / product.original_price) * 100) : 0;
-// FIXED: Added Add to Cart button with event.stopPropagation()
 const productHTML = `
 <div class="product-card bg-white rounded-xl border border-neutral-200 overflow-hidden group">
 <div class="relative" onclick="showProductDetail('${product.id}')">
@@ -1941,7 +1915,6 @@ onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
 ${product.has_video ? `<span class="absolute top-2 right-2 video-badge text-xs px-2 py-1 rounded text-white flex items-center gap-1"><i class="fa-solid fa-video"></i> Video</span>` : ''}
 ${discount > 0 ? `<span class="absolute top-2 left-2 price-badge text-white text-xs font-bold px-2 py-1 rounded">-${discount}%</span>` : ''}
 ${product.product_type === 'dropship' ? `<span class="absolute bottom-2 left-2 dropship-badge text-white text-xs px-2 py-1 rounded flex items-center gap-1"><i class="fa-solid fa-globe"></i> Dropship</span>` : ''}
-<!-- FIXED: Add to Cart Button (Desktop Hover) -->
 <button onclick="event.stopPropagation(); addToCart('${product.id}')"
 class="absolute bottom-2 right-2 bg-brand-600 hover:bg-brand-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition opacity-0 group-hover:opacity-100">
 <i class="fa-solid fa-cart-plus mr-1"></i> Add
@@ -1957,7 +1930,6 @@ ${product.original_price ? `<span class="text-sm text-neutral-400 line-through">
 <i class="fa-solid fa-location-dot text-brand-600"></i>
 <span class="truncate">${product.location || 'Nigeria'}</span>
 </div>
-<!-- FIXED: Add to Cart Button (Mobile Always Visible) -->
 <button onclick="event.stopPropagation(); addToCart('${product.id}')"
 class="w-full mt-3 bg-brand-600 hover:bg-brand-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition md:hidden">
 <i class="fa-solid fa-cart-plus mr-1"></i> Add to Cart
@@ -1975,7 +1947,7 @@ currentProduct = product;
 showToast('Product detail view coming soon!', 'info');
 }
 // ==========================================
-// CART & CHECKOUT - FIXED
+// CART & CHECKOUT
 // ==========================================
 function addToCart(productId) {
 const product = products.find(p => p.id === productId) || currentProduct;
@@ -2092,7 +2064,6 @@ document.getElementById('receipt-file').value = '';
 document.getElementById('receipt-preview').classList.add('hidden');
 document.getElementById('receipt-upload-zone').classList.remove('has-files');
 }
-// FIXED: Actually save to database
 async function submitOrder(event) {
 event.preventDefault();
 if (!receiptFile) {
@@ -2103,42 +2074,31 @@ if (!currentUser) {
 showToast('Please sign in to checkout', 'error');
 return;
 }
-
 const checkoutBtn = document.getElementById('checkout-btn-text');
 const checkoutSpinner = document.getElementById('checkout-spinner');
 checkoutBtn.textContent = 'Processing...';
 checkoutSpinner.classList.remove('hidden');
-
 try {
-// Upload receipt to Supabase storage
 const receiptFileName = `receipts/${currentUser.id}-${Date.now()}.${receiptFile.name.split('.').pop()}`;
 const { error: uploadError } = await supabaseClient.storage
 .from('receipts')
 .upload(receiptFileName, receiptFile);
-
 if (uploadError) throw uploadError;
-
-const {  urlData } = supabaseClient.storage
+const { data: urlData } = supabaseClient.storage
 .from('receipts')
 .getPublicUrl(receiptFileName);
-
-// Calculate total
 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-// Get buyer info
 const buyerName = document.getElementById('buyer-name').value;
 const buyerPhone = document.getElementById('buyer-phone').value;
 const buyerWhatsapp = document.getElementById('buyer-whatsapp').value;
 const buyerState = document.getElementById('buyer-state').value;
 const buyerCity = document.getElementById('buyer-city').value;
 const buyerAddress = document.getElementById('buyer-address').value;
-
-// Create order in database
 const { error: orderError } = await supabaseClient
 .from('orders')
 .insert([{
 buyer_id: currentUser.id,
-seller_id: cart[0].seller_id, // First product's seller
+seller_id: cart[0].seller_id,
 total_amount: total,
 status: 'pending',
 order_number: 'ORD-' + Date.now(),
@@ -2151,9 +2111,7 @@ delivery_address: buyerAddress,
 payment_receipt_url: urlData.publicUrl,
 created_at: new Date().toISOString()
 }]);
-
 if (orderError) throw orderError;
-
 showToast('Order placed! Seller will contact you on WhatsApp 🎉', 'success');
 closeModal('checkout-modal');
 cart = [];
@@ -2191,11 +2149,9 @@ loadProducts({ category });
 function filterByVideo() {
 loadProducts({ hasVideo: true });
 }
-// FIXED: Implemented sorting logic
 function sortProducts() {
 const sortBy = document.getElementById('sort-select').value;
 let sorted = [...products];
-
 switch(sortBy) {
 case 'price-low':
 sorted.sort((a, b) => (a.price || 0) - (b.price || 0));
@@ -2210,7 +2166,6 @@ case 'newest':
 default:
 sorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 }
-
 renderProducts(sorted);
 }
 function resetFilters() {
@@ -2232,7 +2187,6 @@ function goToSlide(index) {
 currentSlide = index;
 updateCarousel();
 }
-// FIXED: Manage interval properly
 function startCarousel() {
 carouselInterval = setInterval(() => {
 const buyerView = document.getElementById('buyer-view');
@@ -2241,7 +2195,6 @@ moveCarousel(1);
 }
 }, 6000);
 }
-
 function stopCarousel() {
 if (carouselInterval) {
 clearInterval(carouselInterval);
@@ -2450,36 +2403,27 @@ console.log("Could not load commission status");
 function showCommissionModal() {
 document.getElementById('commission-modal').classList.add('active');
 }
-// FIXED: Actually save to database
 async function submitCommissionPayment(event) {
 event.preventDefault();
 if (!currentUser) {
 showToast('Please sign in', 'error');
 return;
 }
-
 const receiptFile = document.getElementById('commission-receipt').files[0];
 const reference = document.getElementById('commission-reference').value;
-
 if (!receiptFile) {
 showToast('Please upload receipt', 'error');
 return;
 }
-
 try {
-// Upload receipt
 const receiptFileName = `commissions/${currentUser.id}-${Date.now()}.${receiptFile.name.split('.').pop()}`;
 const { error: uploadError } = await supabaseClient.storage
 .from('receipts')
 .upload(receiptFileName, receiptFile);
-
 if (uploadError) throw uploadError;
-
-const {  urlData } = supabaseClient.storage
+const { data: urlData } = supabaseClient.storage
 .from('receipts')
 .getPublicUrl(receiptFileName);
-
-// Save commission record
 const { error: dbError } = await supabaseClient
 .from('seller_commissions')
 .upsert([{
@@ -2491,9 +2435,7 @@ transaction_reference: reference,
 paid_at: new Date().toISOString(),
 commission_due_date: new Date(Date.now() + COMMISSION_PERIOD_MONTHS * 30 * 24 * 60 * 60 * 1000).toISOString()
 }]);
-
 if (dbError) throw dbError;
-
 showToast('Commission payment submitted! ✅', 'success');
 closeModal('commission-modal');
 loadCommissionStatus();
@@ -2524,7 +2466,7 @@ const { error: uploadError } = await supabaseClient.storage
 .from('products')
 .upload(fileName, imageFile);
 if (uploadError) throw uploadError;
-const {  { publicUrl } } = supabaseClient.storage
+const { data: { publicUrl } } = supabaseClient.storage
 .from('products')
 .getPublicUrl(fileName);
 const newProduct = {
@@ -2588,13 +2530,11 @@ return;
 }
 showToast('Profile feature coming soon! 👤', 'info');
 }
-// Close modals on outside click
 document.querySelectorAll('.modal').forEach(modal => {
 modal.addEventListener('click', (e) => {
 if (e.target === modal) modal.classList.remove('active');
 });
 });
-// Keyboard navigation
 document.addEventListener('keydown', (e) => {
 if (e.key === 'Escape') {
 document.querySelectorAll('.modal.active').forEach(modal => {
@@ -2606,10 +2546,8 @@ if (chatbotOpen) toggleChatbot();
 // ==========================================
 // UTILS
 // ==========================================
-// ADDED: Missing function
 function formatWhatsAppNumber(number) {
 if (!number) return ADMIN_WHATSAPP;
-// Remove spaces, dashes, and ensure it starts with 234
 let cleaned = number.replace(/[\s\-]/g, '');
 if (cleaned.startsWith('0')) {
 cleaned = '234' + cleaned.substring(1);
@@ -2618,12 +2556,9 @@ cleaned = '234' + cleaned;
 }
 return cleaned;
 }
-
-// ADDED: Missing function
 function selectSupplier(supplier) {
 selectedSupplier = supplier;
 showToast(`Connecting to ${supplier === 'aliexpress' ? 'AliExpress' : 'CJ Dropshipping'}...`, 'info');
-// In production, this would open OAuth or API connection
 setTimeout(() => {
 showToast('Supplier connected! You can now import products.', 'success');
 }, 2000);

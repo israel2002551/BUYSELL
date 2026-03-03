@@ -1256,13 +1256,15 @@
     </a>
 
     <!-- ================= JAVASCRIPT ================= -->
-    <script>
+   <script>
         // ==========================================
         // CONFIGURATION
         // ==========================================
         const SUPABASE_URL = 'https://hasairlvjazwhtvylrjl.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_Z179YOa4aZcA2SR2mqWlfw_sM7Xa9y8';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        // FIX: Changed variable name to 'supabaseClient' to prevent CDN conflict
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         
         const ADMIN_WHATSAPP = '2349061484256'; // Efe Israel
         const COMMISSION_AMOUNT = 5000;
@@ -1294,7 +1296,7 @@
         });
         
         async function checkAuth() {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await supabaseClient.auth.getSession();
             currentUser = session?.user || null;
             updateAuthUI();
         }
@@ -1388,7 +1390,7 @@
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             
-            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
             
             if (error) {
                 showToast(error.message, 'error');
@@ -1411,7 +1413,7 @@
             const userType = document.getElementById('reg-usertype').value;
             const whatsapp = document.getElementById('reg-whatsapp').value;
             
-            const { data, error } = await supabase.auth.signUp({
+            const { data, error } = await supabaseClient.auth.signUp({
                 email,
                 password,
                 options: {
@@ -1430,7 +1432,7 @@
             }
             
             if (data.user) {
-                await supabase.from('users').insert({
+                await supabaseClient.from('users').insert({
                     id: data.user.id,
                     email: email,
                     first_name: firstName,
@@ -1448,7 +1450,7 @@
         }
         
         async function logoutUser() {
-            await supabase.auth.signOut();
+            await supabaseClient.auth.signOut();
             currentUser = null;
             updateAuthUI();
             location.reload();
@@ -1470,7 +1472,7 @@
         async function loadUserProfile() {
             if (!currentUser) return;
             
-            const { data: userData } = await supabase
+            const { data: userData } = await supabaseClient
                 .from('users')
                 .select('*')
                 .eq('id', currentUser.id)
@@ -1479,8 +1481,8 @@
             if (userData) {
                 document.getElementById('seller-name').textContent = userData.store_name || userData.first_name || currentUser.email?.split('@')[0] || 'User';
                 document.getElementById('seller-email').textContent = currentUser.email;
-                document.getElementById('store-name').value = userData.store_name || '';
-                document.getElementById('store-whatsapp').value = userData.whatsapp_number || '';
+                if(document.getElementById('store-name')) document.getElementById('store-name').value = userData.store_name || '';
+                if(document.getElementById('store-whatsapp')) document.getElementById('store-whatsapp').value = userData.whatsapp_number || '';
             }
         }
         
@@ -1491,101 +1493,36 @@
             // Mock data for demo (replace with Supabase fetch in production)
             trendingProducts = [
                 {
-                    id: 'aff-1',
-                    title: 'Apple iPhone 15 Pro Max',
-                    price: 1299,
-                    original_price: 1499,
+                    id: 'aff-1', title: 'Apple iPhone 15 Pro Max', price: 1299, original_price: 1499,
                     image_url: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400',
-                    affiliate_link: 'https://amazon.com/dp/B0CHX1W1XY?tag=yourtag-20',
-                    source_platform: 'amazon',
-                    rating: 4.8,
-                    review_count: 2453,
-                    is_trending: true,
-                    isAffiliate: true,
-                    commission_rate: 4.5,
-                    estimated_commission: 58.46,
-                    views: 15234
+                    affiliate_link: 'https://amazon.com/dp/B0CHX1W1XY?tag=yourtag-20', source_platform: 'amazon', isAffiliate: true
                 },
                 {
-                    id: 'aff-2',
-                    title: 'Sony WH-1000XM5 Headphones',
-                    price: 348,
-                    original_price: 399,
+                    id: 'aff-2', title: 'Sony WH-1000XM5 Headphones', price: 348, original_price: 399,
                     image_url: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400',
-                    affiliate_link: 'https://ebay.com/itm/123456',
-                    source_platform: 'ebay',
-                    rating: 4.9,
-                    review_count: 8934,
-                    is_trending: true,
-                    isAffiliate: true,
-                    commission_rate: 6.0,
-                    estimated_commission: 20.88,
-                    views: 12456
+                    affiliate_link: 'https://ebay.com/itm/123456', source_platform: 'ebay', isAffiliate: true
                 },
                 {
-                    id: 'aff-3',
-                    title: 'Samsung Galaxy S24 Ultra',
-                    price: 1199,
+                    id: 'aff-3', title: 'Samsung Galaxy S24 Ultra', price: 1199,
                     image_url: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400',
-                    affiliate_link: 'https://amazon.com/dp/B0CMDRCZBJ?tag=yourtag-20',
-                    source_platform: 'amazon',
-                    rating: 4.7,
-                    review_count: 1823,
-                    is_trending: true,
-                    isAffiliate: true,
-                    commission_rate: 4.5,
-                    estimated_commission: 53.96,
-                    views: 11234
+                    affiliate_link: 'https://amazon.com/dp/B0CMDRCZBJ?tag=yourtag-20', source_platform: 'amazon', isAffiliate: true
                 },
                 {
-                    id: 'aff-4',
-                    title: 'MacBook Pro 16" M3',
-                    price: 2499,
-                    original_price: 2699,
+                    id: 'aff-4', title: 'MacBook Pro 16" M3', price: 2499, original_price: 2699,
                     image_url: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400',
-                    affiliate_link: 'https://amazon.com/dp/B0CM5JV268?tag=yourtag-20',
-                    source_platform: 'amazon',
-                    rating: 4.9,
-                    review_count: 3421,
-                    is_trending: true,
-                    isAffiliate: true,
-                    commission_rate: 3.5,
-                    estimated_commission: 87.47,
-                    views: 9876
+                    affiliate_link: 'https://amazon.com/dp/B0CM5JV268?tag=yourtag-20', source_platform: 'amazon', isAffiliate: true
                 },
                 {
-                    id: 'aff-5',
-                    title: 'Nike Air Jordan 1 Retro',
-                    price: 180,
+                    id: 'aff-5', title: 'Nike Air Jordan 1 Retro', price: 180,
                     image_url: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400',
-                    affiliate_link: 'https://ebay.com/itm/234567',
-                    source_platform: 'ebay',
-                    rating: 4.6,
-                    review_count: 5623,
-                    is_trending: true,
-                    isAffiliate: true,
-                    commission_rate: 7.0,
-                    estimated_commission: 12.60,
-                    views: 8765
+                    affiliate_link: 'https://ebay.com/itm/234567', source_platform: 'ebay', isAffiliate: true
                 },
                 {
-                    id: 'aff-6',
-                    title: 'iPad Pro 12.9" M2',
-                    price: 1099,
-                    original_price: 1199,
+                    id: 'aff-6', title: 'iPad Pro 12.9" M2', price: 1099, original_price: 1199,
                     image_url: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400',
-                    affiliate_link: 'https://amazon.com/dp/B0BJLF2BRM?tag=yourtag-20',
-                    source_platform: 'amazon',
-                    rating: 4.8,
-                    review_count: 4521,
-                    is_trending: true,
-                    isAffiliate: true,
-                    commission_rate: 4.0,
-                    estimated_commission: 43.96,
-                    views: 7654
+                    affiliate_link: 'https://amazon.com/dp/B0BJLF2BRM?tag=yourtag-20', source_platform: 'amazon', isAffiliate: true
                 }
             ];
-            
             renderTrendingDeals();
         }
         
@@ -1680,17 +1617,23 @@
         
         async function trackAffiliateClick(productId, affiliateLink) {
             if (currentUser) {
-                await supabase.from('affiliate_clicks').insert({
+                await supabaseClient.from('affiliate_clicks').insert({
                     product_id: productId,
                     user_id: currentUser.id,
                     clicked_at: new Date().toISOString()
                 });
             }
             
-            await supabase
-                .from('affiliate_products')
-                .update({ clicks: supabase.raw('clicks + 1') })
-                .eq('id', productId);
+            // Note: In a real environment, you'd likely want to check if the table exists first
+            // or have a more robust error handling wrapper here
+            try {
+                await supabaseClient
+                    .from('affiliate_products')
+                    .update({ clicks: supabaseClient.raw('clicks + 1') })
+                    .eq('id', productId);
+            } catch(e) {
+                console.log("Could not log click to database, proceeding to link anyway.");
+            }
             
             window.open(affiliateLink, '_blank', 'noopener,noreferrer');
             showToast('Redirecting to partner site... 🔗', 'info');
@@ -1699,25 +1642,30 @@
         async function loadAffiliateEarnings() {
             if (!currentUser) return;
             
-            const { data: earnings } = await supabase
-                .from('commission_earnings')
-                .select('*')
-                .eq('seller_id', currentUser.id)
-                .order('created_at', { ascending: false });
-            
-            const totalEarnings = earnings?.reduce((sum, e) => sum + (e.commission_amount || 0), 0) || 0;
-            const totalConversions = earnings?.length || 0;
-            
-            document.getElementById('total-earnings').textContent = `₦${totalEarnings.toLocaleString()}`;
-            document.getElementById('total-conversions').textContent = totalConversions;
-            document.getElementById('affiliate-earnings-badge').textContent = `₦${totalEarnings.toLocaleString()}`;
-            document.getElementById('affiliate-earnings-badge').classList.remove('hidden');
-            
-            renderEarningsTable(earnings || []);
+            try {
+                const { data: earnings } = await supabaseClient
+                    .from('commission_earnings')
+                    .select('*')
+                    .eq('seller_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+                
+                const totalEarnings = earnings?.reduce((sum, e) => sum + (e.commission_amount || 0), 0) || 0;
+                const totalConversions = earnings?.length || 0;
+                
+                document.getElementById('total-earnings').textContent = `₦${totalEarnings.toLocaleString()}`;
+                document.getElementById('total-conversions').textContent = totalConversions;
+                document.getElementById('affiliate-earnings-badge').textContent = `₦${totalEarnings.toLocaleString()}`;
+                document.getElementById('affiliate-earnings-badge').classList.remove('hidden');
+                
+                renderEarningsTable(earnings || []);
+            } catch(e) {
+               console.log("Could not load affiliate earnings");
+            }
         }
         
         function renderEarningsTable(earnings) {
             const tbody = document.getElementById('earnings-table-body');
+            if(!tbody) return;
             
             if (earnings.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-8 text-center text-neutral-500">No earnings yet</td></tr>';
@@ -1774,7 +1722,7 @@
             document.getElementById('error-state').classList.add('hidden');
             
             try {
-                let query = supabase.from('products').select('*').eq('status', 'active');
+                let query = supabaseClient.from('products').select('*').eq('status', 'active');
                 
                 if (filters.category && filters.category !== 'all') {
                     query = query.eq('category', filters.category);
@@ -1806,7 +1754,6 @@
                 console.error('Error loading products:', error);
                 document.getElementById('loading-products').classList.add('hidden');
                 document.getElementById('error-state').classList.remove('hidden');
-                showToast('Failed to load products', 'error');
             }
         }
         
@@ -1891,7 +1838,7 @@
         function updateCartCount() {
             const count = cart.reduce((total, item) => total + item.quantity, 0);
             document.getElementById('cart-count').textContent = count;
-            document.getElementById('cart-item-count').textContent = count;
+            if(document.getElementById('cart-item-count')) document.getElementById('cart-item-count').textContent = count;
         }
         
         function showCart() {
@@ -2017,13 +1964,13 @@
             try {
                 const receiptFileName = `receipt-${currentUser.id}-${Date.now()}.${receiptFile.name.split('.').pop()}`;
                 
-                const { error: uploadError } = await supabase.storage
+                const { error: uploadError } = await supabaseClient.storage
                     .from('order-receipts')
                     .upload(receiptFileName, receiptFile);
                 
                 if (uploadError) throw uploadError;
                 
-                const { data: { publicUrl } } = supabase.storage
+                const { data: { publicUrl } } = supabaseClient.storage
                     .from('order-receipts')
                     .getPublicUrl(receiptFileName);
                 
@@ -2051,7 +1998,7 @@
                     receipt_uploaded_at: new Date().toISOString()
                 };
                 
-                const { error } = await supabase.from('orders').insert([orderData]);
+                const { error } = await supabaseClient.from('orders').insert([orderData]);
                 if (error) throw error;
                 
                 sendOrderWhatsApp(orderData);
@@ -2077,7 +2024,7 @@
         }
         
         async function sendOrderWhatsApp(orderData) {
-            const { data: seller } = await supabase
+            const { data: seller } = await supabaseClient
                 .from('users')
                 .select('whatsapp_number, phone, first_name, store_name')
                 .eq('id', orderData.seller_id)
@@ -2201,49 +2148,65 @@
         async function loadSellerStats() {
             if (!currentUser) return;
             
-            const { count: productsCount } = await supabase
-                .from('products')
-                .select('*', { count: 'exact', head: true })
-                .eq('seller_id', currentUser.id)
-                .eq('status', 'active');
-            
-            document.getElementById('stat-products').textContent = productsCount || 0;
+            try {
+                const { count: productsCount } = await supabaseClient
+                    .from('products')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('seller_id', currentUser.id)
+                    .eq('status', 'active');
+                
+                if(document.getElementById('stat-products')) document.getElementById('stat-products').textContent = productsCount || 0;
+            } catch(e) {
+                console.log("Could not load seller stats");
+            }
         }
         
         async function loadSellerProducts() {
             if (!currentUser) return;
             
-            const { data } = await supabase
-                .from('products')
-                .select('*')
-                .eq('seller_id', currentUser.id)
-                .order('created_at', { ascending: false });
+            try {
+                const { data } = await supabaseClient
+                    .from('products')
+                    .select('*')
+                    .eq('seller_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+            } catch(e) {
+                console.log("Could not load seller products");
+            }
         }
         
         async function loadSellerOrders() {
             if (!currentUser) return;
             
-            const { data } = await supabase
-                .from('orders')
-                .select('*')
-                .eq('seller_id', currentUser.id)
-                .order('created_at', { ascending: false });
+            try {
+                const { data } = await supabaseClient
+                    .from('orders')
+                    .select('*')
+                    .eq('seller_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+            } catch(e) {
+                 console.log("Could not load seller orders");
+            }
         }
         
         async function loadCommissionStatus() {
             if (!currentUser) return;
             
-            const { data: commission } = await supabase
-                .from('seller_commissions')
-                .select('*')
-                .eq('seller_id', currentUser.id)
-                .single();
-            
-            if (commission) {
-                document.getElementById('commission-due-date').textContent = 
-                    new Date(commission.commission_due_date).toLocaleDateString();
-                document.getElementById('commission-status-badge').textContent = 
-                    commission.commission_paid ? 'Paid' : 'Active';
+            try {
+                const { data: commission } = await supabaseClient
+                    .from('seller_commissions')
+                    .select('*')
+                    .eq('seller_id', currentUser.id)
+                    .single();
+                
+                if (commission) {
+                    document.getElementById('commission-due-date').textContent = 
+                        new Date(commission.commission_due_date).toLocaleDateString();
+                    document.getElementById('commission-status-badge').textContent = 
+                        commission.commission_paid ? 'Paid' : 'Active';
+                }
+            } catch(e) {
+                console.log("Could not load commission status");
             }
         }
         
@@ -2260,27 +2223,33 @@
                 return;
             }
             
-            const fileName = `commission-${currentUser.id}-${Date.now()}.${receiptFile.name.split('.').pop()}`;
-            const { data: { publicUrl } } = await supabase.storage
-                .from('commission-receipts')
-                .upload(fileName, receiptFile);
-            
-            await supabase
-                .from('seller_commissions')
-                .update({
-                    commission_paid: true,
-                    paid_at: new Date().toISOString(),
-                    payment_receipt_url: publicUrl
-                })
-                .eq('seller_id', currentUser.id);
-            
-            const message = `💰 *COMMISSION PAYMENT*\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n👤 Seller: ${currentUser.email}\n💵 Amount: ₦5,000\n📸 Receipt: ${publicUrl}\n━━━━━━━━━━━━━━━━━━━━━━━━━━`;
-            
-            const whatsappURL = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, '_blank');
-            
-            closeModal('commission-modal');
-            showToast('Commission payment submitted! ✅', 'success');
+            try {
+                const fileName = `commission-${currentUser.id}-${Date.now()}.${receiptFile.name.split('.').pop()}`;
+                const { data: { publicUrl }, error: uploadError } = await supabaseClient.storage
+                    .from('commission-receipts')
+                    .upload(fileName, receiptFile);
+                
+                if (uploadError) throw uploadError;
+                
+                await supabaseClient
+                    .from('seller_commissions')
+                    .update({
+                        commission_paid: true,
+                        paid_at: new Date().toISOString(),
+                        payment_receipt_url: publicUrl
+                    })
+                    .eq('seller_id', currentUser.id);
+                
+                const message = `💰 *COMMISSION PAYMENT*\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n👤 Seller: ${currentUser.email}\n💵 Amount: ₦5,000\n📸 Receipt: ${publicUrl}\n━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+                
+                const whatsappURL = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappURL, '_blank');
+                
+                closeModal('commission-modal');
+                showToast('Commission payment submitted! ✅', 'success');
+            } catch(e) {
+                 showToast('Failed to submit commission', 'error');
+            }
         }
         
         // ==========================================

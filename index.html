@@ -761,7 +761,81 @@
                     </div>
                 </div>
             </div>
-
+            <div id="seller-add-product" class="seller-section hidden-section">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-heading font-bold mb-2">Add New Product</h1>
+                    <p class="text-neutral-500">List an item for sale in your store.</p>
+                </div>
+                
+                <div class="bg-white rounded-xl border border-neutral-200 p-6 max-w-3xl">
+                    <form id="add-product-form" onsubmit="handleProductUpload(event)" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Product Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="prod-name" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="e.g., iPhone 13 Pro Max">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Price (₦) <span class="text-red-500">*</span></label>
+                                <input type="number" id="prod-price" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="e.g., 500000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Original Price (Optional)</label>
+                                <input type="number" id="prod-original-price" class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="Used for discount strike-through">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Category <span class="text-red-500">*</span></label>
+                                <select id="prod-category" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg">
+                                    <option value="electronics">Electronics</option>
+                                    <option value="fashion">Fashion</option>
+                                    <option value="home">Home & Kitchen</option>
+                                    <option value="phones">Phones & Tablets</option>
+                                    <option value="beauty">Beauty & Health</option>
+                                    <option value="sports">Sports</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Condition <span class="text-red-500">*</span></label>
+                                <select id="prod-condition" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg">
+                                    <option value="new">Brand New</option>
+                                    <option value="used-like-new">Used - Like New</option>
+                                    <option value="used-good">Used - Good</option>
+                                    <option value="used-fair">Used - Fair</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Description <span class="text-red-500">*</span></label>
+                            <textarea id="prod-desc" required rows="4" class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="Describe the item, its features, and any flaws..."></textarea>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Item Location <span class="text-red-500">*</span></label>
+                                <input type="text" id="prod-location" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg" placeholder="e.g., Ikeja, Lagos">
+                            </div>
+                            <div class="flex items-center gap-2 mt-8">
+                                <input type="checkbox" id="prod-negotiable" class="w-5 h-5 text-brand-600 rounded">
+                                <label class="text-sm font-medium">Price is Negotiable (Allow Haggling)</label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Product Image <span class="text-red-500">*</span></label>
+                            <input type="file" id="prod-image" accept="image/*" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg bg-neutral-50">
+                        </div>
+                        
+                        <button type="submit" class="btn-primary text-white font-semibold px-6 py-3 rounded-lg w-full flex justify-center items-center gap-2">
+                            <span id="upload-btn-text">Publish Product</span>
+                            <div id="upload-spinner" class="loading-spinner hidden border-white border-t-transparent"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
             <!-- More seller sections would go here (products, add-product, dropshipping, affiliate, orders, commission, settings) -->
             <!-- For brevity, I'm including the key ones -->
             
@@ -2306,6 +2380,75 @@
                 });
             }
         });
+
+       window.handleProductUpload = async function(event) {
+            event.preventDefault();
+            
+            if (!currentUser) {
+                showToast('Please sign in to add products', 'error');
+                return;
+            }
+
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const btnText = document.getElementById('upload-btn-text');
+            const spinner = document.getElementById('upload-spinner');
+            
+            submitBtn.disabled = true;
+            btnText.textContent = 'Uploading...';
+            spinner.classList.remove('hidden');
+
+            try {
+                // 1. Upload Image to Supabase Storage
+                const imageFile = document.getElementById('prod-image').files[0];
+                const fileName = `${currentUser.id}-${Date.now()}.${imageFile.name.split('.').pop()}`;
+                
+                const { error: uploadError } = await supabaseClient.storage
+                    .from('products')
+                    .upload(fileName, imageFile);
+                    
+                if (uploadError) throw uploadError;
+
+                // 2. Get the public URL for the image
+                const { data: { publicUrl } } = supabaseClient.storage
+                    .from('products')
+                    .getPublicUrl(fileName);
+
+                // 3. Save Product to Database
+                const newProduct = {
+                    name: document.getElementById('prod-name').value,
+                    price: parseFloat(document.getElementById('prod-price').value),
+                    original_price: document.getElementById('prod-original-price').value ? parseFloat(document.getElementById('prod-original-price').value) : null,
+                    category: document.getElementById('prod-category').value,
+                    condition: document.getElementById('prod-condition').value,
+                    description: document.getElementById('prod-desc').value,
+                    location: document.getElementById('prod-location').value,
+                    is_negotiable: document.getElementById('prod-negotiable').checked,
+                    image_url: publicUrl,
+                    seller_id: currentUser.id,
+                    status: 'active'
+                };
+
+                const { error: dbError } = await supabaseClient.from('products').insert([newProduct]);
+                if (dbError) throw dbError;
+
+                showToast('Product published successfully! 🎉', 'success');
+                document.getElementById('add-product-form').reset();
+                
+                // Refresh the products list to show the new item
+                loadProducts();
+                
+                // Switch back to Buyer view to see it live
+                toggleDashboard();
+                
+            } catch (error) {
+                console.error('Upload Error:', error);
+                showToast(error.message, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                btnText.textContent = 'Publish Product';
+                spinner.classList.add('hidden');
+            }
+        };
     </script>
 </body>
 </html>
